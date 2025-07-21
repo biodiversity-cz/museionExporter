@@ -4,9 +4,8 @@ from museionExporter.export_jacq.pipeline import Pipeline as Jacq
 from museionExporter.export_pladias.pipeline import Pipeline as Pladias
 
 def process_uploaded_file(input_path, output_path, type_str: str):
-    export_type = ExportTypes(type_str)
 
-    if export_type == ExportTypes.JACQ:
+    if type_str == ExportTypes.JACQ.value:
         pipeline = Jacq(input_path)
     else:
         pipeline = Pladias(input_path)
