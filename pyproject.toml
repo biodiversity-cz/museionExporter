@@ -1,0 +1,11 @@
+[project]
+name = "MuseionExporter"
+version = "0.1.0"
+description = "Convert Museion Excel export to Pladias or JACQ format"
+authors = [{ name = "Petr Novotný" }]
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "pandas",
+    "openpyxl",
+]
