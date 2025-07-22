@@ -6,11 +6,11 @@ from dwcahandler import Eml
 def create_dwc(
     data: pd.DataFrame,
     output_path: str,
-    dataset_name: str = "occurrences.xlsx",
-    description: str = "Dataset created from Museion data",
-    license_name: str = "Creative Commons Attribution 4.0 International",
-    citation: str = "Museion, Czech Republic",
-    rights: str = ""
+    dataset_name: str,
+    description: str,
+    license_name: str,
+    citation: str,
+    rights: str
 ) -> None:
     core = ContentData(
         data=data,

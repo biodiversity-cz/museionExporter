@@ -5,20 +5,29 @@ from museionExporter.export_jacq.pipeline import Pipeline as Jacq
 from museionExporter.export_dwc.pipeline import Pipeline as DwC
 from museionExporter.export_pladias.pipeline import Pipeline as Pladias
 
-def process_uploaded_file(input_path, output_path, type_str: str):
+
+def process_uploaded_file(input_path, output_path, type_str: str,
+                          dwc_dataset_name: str = "occurrences.xlsx",
+                          dwc_description: str = "Dataset created from Museion data",
+                          dwc_license_name: str = "Creative Commons Attribution 4.0 International",
+                          dwc_citation: str = "Museion, Czech Republic",
+                          dwc_rights: str = ""):
     pipeline_map = {
-        ExportTypes.JACQ.value: (Jacq, write_to_excel),
-        ExportTypes.PLADIAS.value: (Pladias, write_to_excel),
-        ExportTypes.DWC.value: (DwC, create_dwc),
+        ExportTypes.JACQ.value: (Jacq),
+        ExportTypes.PLADIAS.value: (Pladias),
+        ExportTypes.DWC.value: (DwC),
     }
 
     entry = pipeline_map.get(type_str)
     if not entry:
         raise ValueError(f"Neznámý exportní typ: {type_str}")
 
-    pipeline_class, writer_function = entry
-
+    pipeline_class = entry
     pipeline = pipeline_class(input_path)
     output_data = pipeline.run()
-    writer_function(output_data, output_path)
 
+    if type_str == ExportTypes.DWC.value:
+        create_dwc(output_data, output_path, dwc_dataset_name, dwc_description, dwc_license_name, dwc_citation,
+                   dwc_rights)
+    else:
+        write_to_excel(output_data, output_path)
