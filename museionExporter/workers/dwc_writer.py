@@ -6,7 +6,6 @@ from dwcahandler import Eml
 def create_dwc(
     data: pd.DataFrame,
     output_path: str,
-    dataset_name: str,
     description: str,
     license_name: str,
     citation: str,
@@ -19,7 +18,7 @@ def create_dwc(
     )
 
     eml = Eml(
-        dataset_name=dataset_name,
+        dataset_name="occurrences.xlsx",
         description=description,
         license=license_name,
         citation=citation,

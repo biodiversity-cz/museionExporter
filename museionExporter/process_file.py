@@ -7,7 +7,6 @@ from museionExporter.export_pladias.pipeline import Pipeline as Pladias
 
 
 def process_uploaded_file(input_path, output_path, type_str: str,
-                          dwc_dataset_name: str = "occurrences.xlsx",
                           dwc_description: str = "Dataset created from Museion data",
                           dwc_license_name: str = "Creative Commons Attribution 4.0 International",
                           dwc_citation: str = "Museion, Czech Republic",
@@ -27,7 +26,7 @@ def process_uploaded_file(input_path, output_path, type_str: str,
     output_data = pipeline.run()
 
     if type_str == ExportTypes.DWC.value:
-        create_dwc(output_data, output_path, dwc_dataset_name, dwc_description, dwc_license_name, dwc_citation,
+        create_dwc(output_data, output_path, dwc_description, dwc_license_name, dwc_citation,
                    dwc_rights)
     else:
         write_to_excel(output_data, output_path)
