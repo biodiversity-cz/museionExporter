@@ -3,6 +3,7 @@ import pandas as pd
 from museionexporter.export_dwc.columns.col10_verbatimElevation import VerbatimElevation
 from museionexporter.export_dwc.columns.col11_occurrenceRemarks import OccurrenceRemarks
 from museionexporter.export_dwc.columns.col12_verbatimIdentification import VerbatimIdentification
+from museionexporter.export_dwc.columns.col13_basisOfRecord import BasisOfRecord
 from museionexporter.export_dwc.columns.col1_occurrenceID import OccurenceId
 from museionexporter.export_dwc.columns.col2_scientificName import ScientificName
 from museionexporter.export_dwc.columns.col3_recordedBy import RecordedBy
@@ -28,7 +29,8 @@ class Pipeline:
               DecimalLongitude(),
               VerbatimElevation(),
               OccurrenceRemarks(),
-              VerbatimIdentification()
+              VerbatimIdentification(),
+              BasisOfRecord()
               ]
 
     def __init__(self, path: str):
