@@ -1,9 +1,9 @@
-from museionExporter.exportTypes import ExportTypes
-from museionExporter.workers.dwc_writer import create_dwc
-from museionExporter.workers.excel_writer import write_to_excel
-from museionExporter.export_jacq.pipeline import Pipeline as Jacq
-from museionExporter.export_dwc.pipeline import Pipeline as DwC
-from museionExporter.export_pladias.pipeline import Pipeline as Pladias
+from museionexporter.exportTypes import ExportTypes
+from museionexporter.workers.dwc_writer import create_dwc
+from museionexporter.workers.excel_writer import write_to_excel
+from museionexporter.export_jacq.pipeline import Pipeline as Jacq
+from museionexporter.export_dwc.pipeline import Pipeline as DwC
+from museionexporter.export_pladias.pipeline import Pipeline as Pladias
 
 
 def process_uploaded_file(input_path, output_path, type_str: str,

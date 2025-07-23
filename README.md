@@ -6,10 +6,7 @@ convert from Museion herbaria&museums software [Museion](https://www.axiell.com/
 
 ## local run
 ```shell
-python3 -m venv venv
-source venv/bin/activate
+poetry install
 
-pip install .
-
-python test.py
+poetry run python test.py
 ```
