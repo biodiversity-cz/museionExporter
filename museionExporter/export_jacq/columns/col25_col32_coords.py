@@ -1,51 +1,53 @@
 from .base import BaseStep
 import pandas
-import re
 
 class Columns25_32_coords(BaseStep):
 
     _column_names = ["coord_NS","lat_degree","lat_minute","lat_second","coord_WE","long_degree","long_minute","long_second"]
 
     def compute(self) -> pandas.DataFrame:
-        def parse_coord(value):
-            return [None, None, None, None]
-            # if not value or pandas.isna(value):
-            #     pass
-            # if len(value) == 8 and value[1] == '0':
-            #     raw = value[0] + value[2:]
-            # else:
-            #     raw = value
-            #
-            # cleaned = re.sub(r'[?#\s]', '', str(raw).strip())
-            #
-            # if not cleaned or len(cleaned) < 3:
-            #     return [None] * 4
-            #
-            # direction = cleaned[0].upper()
-            # if direction not in {'N', 'S', 'E', 'W'}:
-            #     return ['Neznámý směr'] + [None] * 3
-            #
-            # digits = cleaned[1:]
-            # if not digits[:2].isdigit():
-            #     return ['Chyba ve stupních'] + [None] * 3
-            #
-            # try:
-            #     deg = int(digits[0:2])
-            #     min_ = int(digits[2:4]) if len(digits) >= 4 else None
-            #     sec = int(digits[4:]) if len(digits) == 6 else None
-            # except ValueError:
-            #     return ['Chyba při převodu'] + [None] * 3
-            #
-            # return [direction, deg, min_, sec]
-
 
         def parse_row(row):
-            lat = parse_coord(row.get("Zem. šířka (° ' \")", ''))
-            lon = parse_coord(row.get("Zem. délka (° ' \")", ''))
+            lat_hem, lat_dec = self.parse_coord(row['Zem. šířka (°)'])
+            lon_hem, lon_dec = self.parse_coord(row['Zem. délka (°)'])
+            if (lat_hem is None) or (lat_dec is None):
+                return [None, None, None, None,None, None, None, None]
 
-            return lat + lon
+            lat_deg, lat_min, lat_sec = self.decimal_to_dms(lat_dec)
+            lon_deg, lon_min, lon_sec = self.decimal_to_dms(lon_dec)
+            return [
+                lat_hem, lat_deg, lat_min, lat_sec,
+                lon_hem, lon_deg, lon_min, lon_sec
+            ]
 
         result = self._data.apply(parse_row, axis=1, result_type='expand')
         result.columns = self._column_names
         return result
+
+    def decimal_to_dms(self, decimal):
+        degrees = int(decimal)
+        minutes_full = (decimal - degrees) * 60
+        minutes = int(minutes_full)
+        seconds = round((minutes_full - minutes) * 60, 1)
+        return degrees, minutes, seconds
+
+    def parse_coord(self, coord):
+        if not isinstance(coord, str):
+            return None, None
+
+        coord = coord.strip().replace('°', '')
+        parts = coord.split()
+
+        if len(parts) != 2:
+            return None, None
+
+        hemisphere = parts[0]
+        try:
+            value = float(parts[1])
+        except ValueError:
+            return None, None
+
+        return hemisphere, value
+
+
 
