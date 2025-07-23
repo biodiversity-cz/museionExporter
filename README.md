@@ -6,6 +6,7 @@ convert from Museion herbaria&museums software [Museion](https://www.axiell.com/
 
 ## local run
 ```shell
+poetry env use python3.13
 poetry install
 
 poetry run python test.py
