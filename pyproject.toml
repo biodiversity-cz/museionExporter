@@ -12,4 +12,4 @@ readme = "README.md"
 python = "^3.13"
 pandas = "^2"
 openpyxl = "^3"
-dwcahandler = { git = 'git+https://github.com/krkabol/dwcahandler.git', branch = "fix-escapechar-python311" }
+dwcahandler = { git = 'https://github.com/krkabol/dwcahandler.git', branch = "fix-escapechar-python311" }
