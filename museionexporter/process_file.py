@@ -12,9 +12,9 @@ def process_uploaded_file(input_path, output_path, type_str: str,
                           dwc_citation: str = "Museion, Czech Republic",
                           dwc_rights: str = ""):
     pipeline_map = {
-        ExportTypes.JACQ.value: (Jacq),
-        ExportTypes.PLADIAS.value: (Pladias),
-        ExportTypes.DWC.value: (DwC),
+        ExportTypes.JACQ.value: Jacq,
+        ExportTypes.PLADIAS.value: Pladias,
+        ExportTypes.DWC.value: DwC,
     }
 
     entry = pipeline_map.get(type_str)
