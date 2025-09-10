@@ -29,6 +29,15 @@ class Columns25_32_coords(BaseStep):
         minutes_full = (decimal - degrees) * 60
         minutes = int(minutes_full)
         seconds = round((minutes_full - minutes) * 60, 1)
+        # Ošetření přetečení sekund
+        if seconds >= 60:
+            seconds = 0
+            minutes += 1
+
+        # Ošetření přetečení minut
+        if minutes >= 60:
+            minutes = 0
+            degrees += 1
         return degrees, minutes, seconds
 
     def parse_coord(self, coord):
