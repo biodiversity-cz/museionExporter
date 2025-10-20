@@ -19,5 +19,6 @@ def read_table(path: str) -> pd.DataFrame:
         print("Pozor, následující sloupce nebyly nalezeny v souboru:")
         for col in missing_columns:
             print(f"- {col}")
+        raise Exception("Pozor, následující sloupce nebyly nalezeny v souboru: " + ", ".join(missing_columns))
 
     return df[available_columns]
