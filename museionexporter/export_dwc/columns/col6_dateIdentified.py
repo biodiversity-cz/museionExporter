@@ -7,5 +7,6 @@ class DateIdentified(BaseStep):
 
     def compute(self) -> pandas.DataFrame:
         series = self._data["Datum určení"].copy()
-        pandas.to_datetime(series, errors="coerce").dt.strftime("%Y-%m-%d"),
+        series = pandas.to_datetime(series, errors="coerce").dt.strftime("%Y-%m-%d")
+        series = series.fillna('')
         return pandas.DataFrame({self._column_name: series})

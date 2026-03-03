@@ -7,4 +7,5 @@ class RecordedBy(BaseStep):
 
     def compute(self) -> pandas.DataFrame:
         series = self._data["(n) Autoři/sběratelé"].copy()
+        series = series.fillna('')
         return pandas.DataFrame({self._column_name: series})

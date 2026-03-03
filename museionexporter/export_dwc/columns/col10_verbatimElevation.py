@@ -7,5 +7,6 @@ class VerbatimElevation(BaseStep):
 
     def compute(self) -> pandas.DataFrame:
         series = self._data["Nadmořská výška"].copy()
+        series = series.fillna('')
         return pandas.DataFrame({self._column_name: series})
 

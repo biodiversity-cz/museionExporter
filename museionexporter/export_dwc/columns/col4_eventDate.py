@@ -8,5 +8,6 @@ class EventDate(BaseStep):
     def compute(self) -> pandas.DataFrame:
         series = self._data["Datace sběru"].copy()
         series = pandas.to_datetime(series, errors="coerce", dayfirst=True).dt.strftime("%Y-%m-%d")
+        series = series.fillna('')
         return pandas.DataFrame({self._column_name: series})
 

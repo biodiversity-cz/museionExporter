@@ -11,10 +11,12 @@ class Locality(BaseStep):
             obec = row['Lokalita - název']
             popis = row['Charakteristika místa sběru']
 
-            if not pandas.isna(obec):
+            if pandas.isna(obec) or obec == '':
+                obec = ''
+            else:
                 text += f"{obec} - "
 
-            if not pandas.isna(popis):
+            if not pandas.isna(popis) and popis != '':
                 text += str(popis)
 
             return text.strip()

@@ -9,6 +9,12 @@ class OccurenceId(BaseStep):
         def format_id(row):
             specimen_id = row['Inventární číslo']
             herbarium = row['Herbář']
+            
+            if pandas.isna(specimen_id) or specimen_id == '':
+                specimen_id = ''
+            if pandas.isna(herbarium) or herbarium == '':
+                herbarium = ''
+            
             text = f"{herbarium} {specimen_id}"
             return text.strip()
 
