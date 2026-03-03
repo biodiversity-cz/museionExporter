@@ -7,6 +7,6 @@ class EventDate(BaseStep):
 
     def compute(self) -> pandas.DataFrame:
         series = self._data["Datace sběru"].copy()
-        pandas.to_datetime(series, errors="coerce").dt.strftime("%Y-%m-%d"),
+        series = pandas.to_datetime(series, errors="coerce", dayfirst=True).dt.strftime("%Y-%m-%d")
         return pandas.DataFrame({self._column_name: series})
 

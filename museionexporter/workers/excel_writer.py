@@ -1,24 +1,27 @@
 import pandas as pd
+import warnings
+
+# Suppress openpyxl default style warning at module level
+warnings.filterwarnings("ignore", message="Workbook contains no default style")
 
 
 def write_to_excel(data: pd.DataFrame, output_path: str, sheet_name: str = 'ready4JACQ') -> None:
     with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
-        data.to_excel(writer, index=False, sheet_name = sheet_name)
+            data.to_excel(writer, index=False, sheet_name=sheet_name)
 
+            worksheet = writer.sheets[sheet_name]
 
-        worksheet = writer.sheets[sheet_name]
+            # Projdeme všechny sloupce a upravíme jejich šířku
+            for col in worksheet.columns:
+                max_length = 0
+                column = col[0].column_letter  # Získáme písmeno sloupce
 
-        # Projdeme všechny sloupce a upravíme jejich šířku
-        for col in worksheet.columns:
-            max_length = 0
-            column = col[0].column_letter  # Získáme písmeno sloupce
+                for cell in col:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(cell.value)
+                    except:
+                        pass
 
-            for cell in col:
-                try:
-                    if len(str(cell.value)) > max_length:
-                        max_length = len(cell.value)
-                except:
-                    pass
-
-            adjusted_width = (max_length + 2)  # Přidáme 2 pro mezeru
-            worksheet.column_dimensions[column].width = adjusted_width
+                adjusted_width = (max_length + 2)  # Přidáme 2 pro mezeru
+                worksheet.column_dimensions[column].width = adjusted_width

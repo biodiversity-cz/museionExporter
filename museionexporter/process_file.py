@@ -4,6 +4,7 @@ from museionexporter.workers.excel_writer import write_to_excel
 from museionexporter.export_jacq.pipeline import Pipeline as Jacq
 from museionexporter.export_dwc.pipeline import Pipeline as DwC
 from museionexporter.export_pladias.pipeline import Pipeline as Pladias
+from museionexporter.export_cetaf.pipeline import Pipeline as Cetaf
 
 
 def process_uploaded_file(input_path, output_path, type_str: str,
@@ -15,6 +16,7 @@ def process_uploaded_file(input_path, output_path, type_str: str,
         ExportTypes.JACQ.value: Jacq,
         ExportTypes.PLADIAS.value: Pladias,
         ExportTypes.DWC.value: DwC,
+        ExportTypes.CETAF.value: Cetaf,
     }
 
     entry = pipeline_map.get(type_str)

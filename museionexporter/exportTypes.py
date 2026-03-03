@@ -4,3 +4,4 @@ class ExportTypes(Enum):
     PLADIAS = "pladias"
     JACQ = "jacq"
     DWC = 'dwc'
+    CETAF = 'cetaf'
