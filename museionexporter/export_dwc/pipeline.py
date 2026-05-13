@@ -16,7 +16,7 @@ from museionexporter.export_dwc.columns.col9_decimalLongitude import DecimalLong
 
 from museionexporter.workers.excel_reader import read_table
 
-
+# deprecated
 class Pipeline:
     _steps = [OccurenceId(),
               ScientificName(),

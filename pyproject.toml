@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "museionexporter"
-version = "0.2.0"
+version = "0.2.1"
 description = "Convert Museion Excel export to Pladias or JACQ format"
 authors = [
     "Petr Novotný <krkabol@gmail.com>"
@@ -10,6 +10,5 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-pandas = "^2"
+pandas = "^3"
 openpyxl = "^3"
-dwcahandler = { git = 'https://github.com/krkabol/dwcahandler.git', branch = "fix-escapechar-python311" }
