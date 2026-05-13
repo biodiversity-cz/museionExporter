@@ -23,4 +23,4 @@ class DecimalLatitude(BaseStep):
 
         if 'S' in prefix or 'W' in prefix or '-' in prefix:
             number = -abs(number)
-        return str(number)
+        return str(round(number, 6))
