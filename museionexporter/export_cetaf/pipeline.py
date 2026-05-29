@@ -1,6 +1,7 @@
 import pandas as pd
 
 from museionexporter.export_cetaf.columns.col1_id import Id
+from museionexporter.export_cetaf.columns.col15_verbatimEventDate import VerbatimEventDate
 from museionexporter.export_dwc.columns.col10_verbatimElevation import VerbatimElevation
 from museionexporter.export_dwc.columns.col11_occurrenceRemarks import OccurrenceRemarks
 from museionexporter.export_dwc.columns.col12_verbatimIdentification import VerbatimIdentification
@@ -32,7 +33,8 @@ class Pipeline:
               VerbatimIdentification(),
               IdentifiedBy(),
               DateIdentified(),
-              ScientificName()
+              ScientificName(),
+              VerbatimEventDate()
               ]
 
     def __init__(self, path: str):
